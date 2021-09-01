@@ -1,7 +1,5 @@
-from sys import stdout
 from botRequests import sendMessage
 import subprocess
-import os
 from modularfunctions.cd_evaluator_function import cdEvaluator
 
 def runTerminal(command, password):

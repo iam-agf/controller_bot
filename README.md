@@ -32,26 +32,32 @@ First create a folder called `.controller` in your folder `/home/YOUR-USER-DIREC
 Description=Telegram Terminal Bot
 Wants=network-online.target
 After=network.target network-online.target
+StartLimitIntervalSec=0
 
 [Service]
 Type=idle
 WorkingDirectory=/home/YOUR-USER-DIRECTORY
 ExecStart=/usr/bin/python3 /home/YOUR-USER-DIRECTORY/.controller/main.py
 Restart=on-failure
+RestartSec=3s
 
 [Install]
 WantedBy=multi-user.target
 
 ```
 
-Then save it. Now run
+Then save it. Now type in the terminal
 
+```
+sudo -m pip install pyTelegramBotAPI
+```
+Because probably you ran this program in your user, not as the sudo user, and you need to install it this way to be able to use the program correctly as a daemon. After it, now run in the terminal 
 ```
 systemctl enable controller
 systemctl daemon-reload
 ```
 
-After this, reboot, and you will receive the message to your Telegram account.
+Finally reboot your computer and you will be able to run this in your Telegram bot.
 
 Notice that this will only work if you're connecting to a network already registered in your computer. If not, the `systemd` program will continue trying to conncet until it achieves it.
 
